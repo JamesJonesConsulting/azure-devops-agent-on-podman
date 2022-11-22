@@ -9,8 +9,8 @@
     - ansible.builtin.include_role:
         name: jamesjonesconsulting.azuredevops_agent_fixes.agent_setup
       vars:
-        vsts_agents: "{{ vsts_agents }}"
-        vsts_agent_podman_group: docker
-        vsts_agent_url: "{{ vsts_agent_home_url }}"
+        vsts_agents: "{{ vsts_host_agents }}"
+        vsts_agent_podman_group: "{{ vsts_agent_host_podman_group }}"
+        vsts_agent_url: "{{ vsts_agent_host_url }}"
     #     vsts_agent_registration_token: "{{ vsts_agent_registration_token }}"
     #     vsts_agent_tags: "{{ vsts_agent_host_tags }}"
