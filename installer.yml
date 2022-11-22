@@ -41,7 +41,7 @@ jobs:
                 ansible-galaxy collection install -r ansible/requirements.yml -f 
                 ansible-playbook -i $(Build.SourcesDirectory)/inventory/home/hosts --vault-password-file $(Agent.TempDirectory)/.vault --user=$(default_user) ansible/playbook.yml --extra-vars 'host_or_group=${{ parameters.host }} vsts_agent_vaulted_variables=$(Build.SourcesDirectory)/vault/home/vsts-agent/vsts-agent.yml' -b
               workingDirectory: $(Build.SourcesDirectory)/pipeline
-              displayName: Connect to host and setup GitLab Runner with Podman
+              displayName: Connect to host and setup Azure DevOps agent with Podman
               env:
                 SSH_KEY: $(default_ssh_key)
                 VAULT_KEY: $(ansible_vault_key)
