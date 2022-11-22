@@ -1,0 +1,17 @@
+parameters:
+  - name: host
+    displayName: Linux Hostname (example.com)
+    type: string
+    default: jamacer
+    values:
+      - asuspn51
+      - jamacer
+      - jambrix
+      - beebox
+      - sganbuild01
+
+trigger: none
+extends:
+  template: installer.yml
+  parameters:
+    host: ${{ parameters.host }}

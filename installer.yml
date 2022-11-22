@@ -1,0 +1,47 @@
+parameters:
+  - name: host
+    type: string
+resources:
+  repositories:
+    - repository: inventory
+      type: github
+      name: JamesJonesConsulting/AnsibleInventory
+      endpoint: JamesJonesConsulting      
+    - repository: vault
+      type: github
+      name: JamesJonesConsulting/AnsibleVault
+      endpoint: JamesJonesConsulting      
+  containers: 
+    - container: podman-dind
+      image: registry.gitlab.com/jamesjonesconsulting/podman-dind-like:latest
+      endpoint: JamesJonesConsultingDockerGitlab
+      options: --userns=keep-id --privileged --user root
+      # mapDockerSocket: false
+jobs:
+  - deployment: azure_devops_agent_deployment
+    displayName: Azure DevOps Agent Deployment
+    pool: FedoraHosted
+    environment: GitLab
+    container: podman-dind
+    variables:
+      - group: Connections
+    strategy:
+      runOnce:
+        deploy:
+          steps: 
+            - checkout: self 
+              path: s/pipeline
+            - checkout: inventory
+              path: s/inventory
+            - checkout: vault
+              path: s/vault
+            - bash: |
+                eval $(ssh-agent); ssh-add <(echo "${SSH_KEY}" | base64 -d);
+                echo -n "${VAULT_KEY}" | base64 -d > $(Agent.TempDirectory)/.vault
+                ansible-galaxy collection install -r ansible/requirements.yml -f 
+                ansible-playbook -i $(Build.SourcesDirectory)/inventory/home/hosts --vault-password-file $(Agent.TempDirectory)/.vault --user=$(default_user) ansible/playbook.yml --extra-vars 'host_or_group=${{ parameters.host }} vsts_agent_vaulted_variables=$(Build.SourcesDirectory)/vault/home/vsts-agent/vsts-agent.yml' -b
+              workingDirectory: $(Build.SourcesDirectory)/pipeline
+              displayName: Connect to host and setup GitLab Runner with Podman
+              env:
+                SSH_KEY: $(default_ssh_key)
+                VAULT_KEY: $(ansible_vault_key)
