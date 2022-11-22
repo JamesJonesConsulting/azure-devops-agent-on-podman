@@ -9,9 +9,8 @@
     # - ansible.builtin.include_role:
     #     name: jamesjonesconsulting.azure_devops_agent_fixes.agent_setup
     #   vars:
-    #     vsts_agent_username: gitlab-runner
+    #     vsts_agents: "{{ vsts_agents }}"
     #     vsts_agent_podman_group: docker
     #     vsts_agent_url: "{{ vsts_agent_home_url }}"
     #     vsts_agent_registration_token: "{{ vsts_agent_registration_token }}"
     #     vsts_agent_tags: "{{ vsts_agent_host_tags }}"
-    #     vsts_agent_count: "{{ vsts_agent_host_count | default(1) }}"
