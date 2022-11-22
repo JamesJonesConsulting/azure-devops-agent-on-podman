@@ -6,11 +6,11 @@
       ansible.builtin.include_vars:
         file: "{{ vsts_agent_vaulted_variables }}"
         name: vsts_agent
-    # - ansible.builtin.include_role:
-    #     name: jamesjonesconsulting.azure_devops_agent_fixes.agent_setup
-    #   vars:
-    #     vsts_agents: "{{ vsts_agents }}"
-    #     vsts_agent_podman_group: docker
-    #     vsts_agent_url: "{{ vsts_agent_home_url }}"
+    - ansible.builtin.include_role:
+        name: jamesjonesconsulting.azure_devops_agent_fixes.agent_setup
+      vars:
+        vsts_agents: "{{ vsts_agents }}"
+        vsts_agent_podman_group: docker
+        vsts_agent_url: "{{ vsts_agent_home_url }}"
     #     vsts_agent_registration_token: "{{ vsts_agent_registration_token }}"
     #     vsts_agent_tags: "{{ vsts_agent_host_tags }}"
