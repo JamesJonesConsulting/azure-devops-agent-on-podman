@@ -9,6 +9,7 @@ parameters:
       - jambrix
       - beebox
       - sganbuild01
+      - indpc
 
 trigger: none
 extends:
