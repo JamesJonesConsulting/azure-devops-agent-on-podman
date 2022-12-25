@@ -39,7 +39,7 @@ jobs:
                 eval $(ssh-agent); ssh-add <(echo "${SSH_KEY}" | base64 -d);
                 echo -n "${VAULT_KEY}" | base64 -d > $(Agent.TempDirectory)/.vault
                 ansible-galaxy collection install -r ansible/requirements.yml -f 
-                ansible-playbook -i $(Build.SourcesDirectory)/inventory/home/hosts --vault-password-file $(Agent.TempDirectory)/.vault --user=$(default_user) ansible/playbook.yml --extra-vars 'host_or_group=${{ parameters.host }} token=$(vsts_agent_install_token) vsts_agent_vaulted_variables=$(Build.SourcesDirectory)/vault/home/vsts-agent/vsts-agent.yml' -b
+                ansible-playbook -i $(Build.SourcesDirectory)/inventory/home/hosts --vault-password-file $(Agent.TempDirectory)/.vault ansible/playbook.yml --extra-vars 'host_or_group=${{ parameters.host }} token=$(vsts_agent_install_token) vsts_agent_vaulted_variables=$(Build.SourcesDirectory)/vault/home/vsts-agent/vsts-agent.yml' -b
               workingDirectory: $(Build.SourcesDirectory)/pipeline
               displayName: Connect to host and setup Azure DevOps agent with Podman
               env:

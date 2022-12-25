@@ -4,12 +4,13 @@ parameters:
     type: string
     default: jamacer
     values:
-      - asuspn51
-      - jamacer
-      - jambrix
-      - beebox
-      - sganbuild01
-      - indpc
+      - jamacer.jamesjonesconsulting.com
+      - jambrix.jamesjonesconsulting.com
+      - beebox.jamesjonesconsulting.com
+      - build01.jamesjonesconsulting.com
+      - build02.jamesjonesconsulting.com
+      - indpc.jamesjonesconsulting.com
+      - jamdb.jamesjonesconsulting.com
 
 trigger: none
 extends:
