@@ -11,6 +11,8 @@ parameters:
       - build02.jamesjonesconsulting.com
       - indpc.jamesjonesconsulting.com
       - jamdb.jamesjonesconsulting.com
+      - gitlab.jamesjonesconsulting.com
+      - sonarqube.jamesjonesconsulting.com
 
 trigger: none
 extends:
