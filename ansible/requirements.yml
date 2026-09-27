@@ -1,4 +1,4 @@
 collections:
   - name: https://github.com/JamesJonesConsulting/jamesjonesconsulting.azuredevops_agent_fixes.git
     type: git
-    version: main
+    version: release/1.1.0
